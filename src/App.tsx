@@ -1,26 +1,33 @@
 import React, { useState } from "react";
-import QuizButton from "./components/QuizButton";
+import CardButton from "./components/CardButton";
+import cardData from "./components/CardData";
 
 const App: React.FC = () => {
-  const [isCorrectAnswer, setIsCorrectAnswer] = useState<boolean>(false);
+  const [leftCard, setLeftCard] = useState(cardData[0]);
+  const [rightCard, setRightCard] = useState(cardData[1]);
 
-  const handleButtonClick = () => {
-    // Generate a random boolean value to determine correctness
-    const isCorrect = Math.random() < 0.5; // 50% chance of being correct
+  
 
-    setIsCorrectAnswer(isCorrect);
+  const getCards = () => {
+    // Assign cards to the left and right sides of the screen
+    var leftCard = cardData[Math.floor(Math.random() * cardData.length)];
+    var rightCard = cardData[Math.floor(Math.random() * cardData.length)];
 
-    // Handle any additional logic here, e.g., scoring, displaying feedback, etc.
+    while (leftCard.cost !== rightCard.cost) {
+      leftCard = cardData[Math.floor(Math.random() * cardData.length)];
+      rightCard = cardData[Math.floor(Math.random() * cardData.length)];
+    }
   };
 
   return (
     <div>
-      <h1 className="text-3xl font-bold underline text-red-600">
-        Simple React Typescript Tailwind Sample
-      </h1>
       <div className="flex h-screen">
-        <QuizButton isCorrect={isCorrectAnswer} onClick={handleButtonClick} />
-        <QuizButton isCorrect={!isCorrectAnswer} onClick={handleButtonClick} />
+        <div className="w-1/2">
+          <CardButton card={leftCard} />
+        </div>
+        <div className="w-1/2">
+          <CardButton card={rightCard} />
+        </div>
       </div>
     </div>
   );
