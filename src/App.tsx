@@ -16,7 +16,7 @@ const App: React.FC = () => {
 
     console.log("newLeftCard", newLeftCard);
     // If the card costs are the same, keep generating new cards until they are different
-    while (leftCard.cost === rightCard.cost) {
+    while (newLeftCard.cost === newRightCard.cost) {
       newLeftCard = cardData[Math.floor(Math.random() * cardData.length)];
       newRightCard = cardData[Math.floor(Math.random() * cardData.length)];
     }

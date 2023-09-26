@@ -11,9 +11,6 @@ interface CardButtonProps {
 }
 
 const CardButton: React.FC<CardButtonProps> = ({ card, onClick }) => {
-  onClick = () => {
-    console.log("onClick");
-  }
   return (
     <div className="card">
       <button
