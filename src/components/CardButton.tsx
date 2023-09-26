@@ -1,6 +1,7 @@
 import React from "react";
 
 interface CardButtonProps {
+  onClick: () => void;
   card: {
     id: number;
     name: string;
@@ -9,7 +10,7 @@ interface CardButtonProps {
   };
 }
 
-const CardButton: React.FC<CardButtonProps> = ({ card }) => {
+const CardButton: React.FC<CardButtonProps> = ({ card, onClick }) => {
   return (
     <div className="card">
       <button

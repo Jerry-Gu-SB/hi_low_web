@@ -3,30 +3,35 @@ import CardButton from "./components/CardButton";
 import cardData from "./components/CardData";
 
 const App: React.FC = () => {
-  const [leftCard, setLeftCard] = useState(cardData[0]);
+  const [leftCard, setLeftCard] = useState(cardData[2]);
   const [rightCard, setRightCard] = useState(cardData[1]);
 
-  
-
   const getCards = () => {
-    // Assign cards to the left and right sides of the screen
-    var leftCard = cardData[Math.floor(Math.random() * cardData.length)];
-    var rightCard = cardData[Math.floor(Math.random() * cardData.length)];
+    console.log("getCards");
 
-    while (leftCard.cost !== rightCard.cost) {
-      leftCard = cardData[Math.floor(Math.random() * cardData.length)];
-      rightCard = cardData[Math.floor(Math.random() * cardData.length)];
+    let newLeftCard, newRightCard;
+    // Assign cards to the left and right sides of the screen
+    newLeftCard = cardData[Math.floor(Math.random() * cardData.length)];
+    newRightCard = cardData[Math.floor(Math.random() * cardData.length)];
+
+    console.log("newLeftCard", newLeftCard);
+    // If the card costs are the same, keep generating new cards until they are different
+    while (leftCard.cost === rightCard.cost) {
+      newLeftCard = cardData[Math.floor(Math.random() * cardData.length)];
+      newRightCard = cardData[Math.floor(Math.random() * cardData.length)];
     }
+    setLeftCard(newLeftCard);
+    setRightCard(newRightCard);
   };
 
   return (
     <div>
       <div className="flex h-screen">
         <div className="w-1/2">
-          <CardButton card={leftCard} />
+          <CardButton card={leftCard} onClick={getCards}/>
         </div>
         <div className="w-1/2">
-          <CardButton card={rightCard} />
+          <CardButton card={rightCard} onClick={getCards}/>
         </div>
       </div>
     </div>
