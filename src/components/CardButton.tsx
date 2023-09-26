@@ -11,10 +11,13 @@ interface CardButtonProps {
 }
 
 const CardButton: React.FC<CardButtonProps> = ({ card, onClick }) => {
+  onClick = () => {
+    console.log("onClick");
+  }
   return (
     <div className="card">
       <button
-        className={`w-full h-screen p-10 relative overflow-hidden`}
+        className={`w-full h-screen p-10 relative overflow-hidden`} onClick={onClick}
       >
         <div
           className={`hover:scale-105 transform origin-top-left transition-transform duration-300 ease-in-out`}
