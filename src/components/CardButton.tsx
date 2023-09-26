@@ -21,7 +21,7 @@ const CardButton: React.FC<CardButtonProps> = ({ card, onClick }) => {
         >
           <img src={card.imageSrc} alt={card.name} />
           <p>Cost: ${card.cost.toFixed(2)}</p>
-          <p>URL: ${card.imageSrc}</p>
+          {/* <p>URL: ${card.imageSrc}</p> */}
         </div>
       </button>
     </div>
