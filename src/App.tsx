@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import CardButton from "./components/CardButton";
+import cardData from "./components/CardData";
+import StartMenu from "./components/StartMenu";
 
-function App() {
+const App: React.FC = () => {
+  const [leftCard, setLeftCard] = useState(cardData[2]);
+  const [rightCard, setRightCard] = useState(cardData[1]);
+
+  const getCards = () => {
+    console.log("getCards");
+
+    let newLeftCard, newRightCard;
+    // Assign cards to the left and right sides of the screen
+    newLeftCard = cardData[Math.floor(Math.random() * cardData.length)];
+    newRightCard = cardData[Math.floor(Math.random() * cardData.length)];
+
+    console.log("newLeftCard", newLeftCard);
+    // If the card costs are the same, keep generating new cards until they are different
+    while (newLeftCard.cost === newRightCard.cost) {
+      newLeftCard = cardData[Math.floor(Math.random() * cardData.length)];
+      newRightCard = cardData[Math.floor(Math.random() * cardData.length)];
+    }
+    setLeftCard(newLeftCard);
+    setRightCard(newRightCard);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="flex h-screen">
+        <StartMenu/>
+        <div className="w-1/2">
+          <CardButton card={leftCard} onClick={getCards}/>
+        </div>
+        <div className="w-1/2">
+          <CardButton card={rightCard} onClick={getCards}/>
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
