@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import CardButton from "./components/CardButton";
 import cardData from "./components/CardData";
+import StartMenu from "./components/StartMenu";
 
 const App: React.FC = () => {
   const [leftCard, setLeftCard] = useState(cardData[2]);
@@ -27,6 +28,7 @@ const App: React.FC = () => {
   return (
     <div>
       <div className="flex h-screen">
+        <StartMenu/>
         <div className="w-1/2">
           <CardButton card={leftCard} onClick={getCards}/>
         </div>
