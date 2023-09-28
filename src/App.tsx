@@ -12,7 +12,7 @@ const App: React.FC = () => {
   const [rightCard, setRightCard] = useState(cardData[1]);
 
   const handleClick = (clickedCard: Card) => {
-    if (clickedCard.cost > leftCard.cost && clickedCard.cost > rightCard.cost) {
+    if (clickedCard.cost > leftCard.cost || clickedCard.cost > rightCard.cost) {
       setScore(score + 1);
     }
 
