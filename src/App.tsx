@@ -1,19 +1,26 @@
 import React, { useState } from "react";
+
 import CardButton from "./components/CardButton";
 import cardData from "./components/CardData";
 import Card from "./components/Card";
 import StartMenu from "./components/StartMenu";
+import GameOver from "./components/GameOver";
 
 const App: React.FC = () => {
   const [score, setScore] = useState(0);
   const [gameStarted, setGameStarted] = useState(false);
-  
+  const [gameOver, setGameOver] = useState(false);
+
   const [leftCard, setLeftCard] = useState(cardData[2]);
   const [rightCard, setRightCard] = useState(cardData[1]);
 
   const handleClick = (clickedCard: Card) => {
     if (clickedCard.cost > leftCard.cost || clickedCard.cost > rightCard.cost) {
       setScore(score + 1);
+    }
+    else {
+      setScore(0);
+      setGameOver(true);
     }
 
     assignNewCards();
@@ -36,8 +43,8 @@ const App: React.FC = () => {
 
   return (
     <div>
-      {!gameStarted && <StartMenu onStart={() => setGameStarted(true)} />}
-      {gameStarted && (
+      {!gameStarted && <StartMenu onStart={() => {setGameStarted(true); setGameOver(false);}} />}
+      {gameStarted && !gameOver && (
         <div className="flex h-screen">
           <h1>Score: {score}</h1>
           <div className="w-1/2">
@@ -48,6 +55,7 @@ const App: React.FC = () => {
           </div>
         </div>
       )}
+      {gameOver && <GameOver onRestart={() => {setGameStarted(true); setGameOver(false);}} />}
     </div>
   );
 };
